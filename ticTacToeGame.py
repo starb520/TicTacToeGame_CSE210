@@ -67,9 +67,7 @@ def mark_square(user_input, symbol, board):
 print("This is a the game of tic-tac-toe. Take turns putting X's and ",
       "O's on the board. Use the numbers 1 through 9 to identify",
       " where you would like to go.\n")
-for number in range(1,10):
-    if number % 3 != 0:
-        print(" ", number, " |")
+
 
 
     
