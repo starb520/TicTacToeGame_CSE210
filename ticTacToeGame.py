@@ -4,6 +4,7 @@
 X = "X"
 O = "O"
 BLANK = " "
+
 def new_board():
     '''Create a list of nine empty spaces to play tic-tac-toe.'''
     blank_board = [BLANK, BLANK, BLANK, 
@@ -50,23 +51,56 @@ def check_user_input(user_input):
             return
     except:
         ValueError
-        print("Please enter a number one and nine.")
+        print("Please enter a number between one and nine.")
         return
     return user_input
     
 
 def mark_square(user_input, symbol, board):
     if board[user_input - 1] == BLANK:
-        board[user_input - 1] == symbol
+        board[user_input - 1] = symbol
     else:
         print("Square is already taken.\n"
                "Please enter a number for an empty square.")
     return
 
+def play_game():
+    '''Continue to prompt for X and O until the game is ended. The game ends 
+    by one player getting three in a row horizontally, vertically, or 
+    diagonally, or neither player wins (a tie), or the game is quit.'''
+    end = False
 
-print("This is a the game of tic-tac-toe. Take turns putting X's and ",
-      "O's on the board. Use the numbers 1 through 9 to identify",
-      " where you would like to go.\n")
+    while end == False:
+        is_x_turn(board)
+        if is_x_turn(board) == True:
+            symbol = X
+        else:
+            symbol = O
+
+        user_input = input(symbol + "> ")
+        end = quit_game(user_input)
+
+        user_input = check_user_input(user_input)
+        mark_square(user_input, symbol, board)
+        # print(board)
+
+
+
+    
+print()
+print("This is a the game of tic-tac-toe.")
+print("Take turns putting X's or O's in the spaces ")
+print("1 through 9 to play the game or press 'Q' to quit.")
+print("\t  1 | 2 | 3 ")
+print("\t ---+---+---")
+print("\t  4 | 5 | 6 ")
+print("\t ---+---+---")
+print("\t  7 | 8 | 9 ")
+
+# Create a blank board for tic-tac-toe game.
+board = new_board()
+
+
 
 
 
