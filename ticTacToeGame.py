@@ -15,7 +15,7 @@ def new_board():
 def is_x_turn(board):
     '''Determine whose turn it is in the game.'''
     count_x = 0
-    count_y = 0
+    count_o = 0
     count_blank = 0
 
     for space in range(len(board)):
@@ -23,12 +23,12 @@ def is_x_turn(board):
         if board[space] == X:
             count_x += 1
         elif board[space] == O:
-            count_y += 1
+            count_o += 1
         else:
             count_blank += 1
 
         # Compare X's and O's to determine whose turn it is to go. 
-    if count_x <= count_y and count_blank != 0:
+    if count_x <= count_o and count_blank != 0:
         return True
     else:
          return False
@@ -49,8 +49,7 @@ def check_user_input(user_input):
         if user_input < 1 or user_input > 9:
             print("Please enter a number between one and nine.")
             return
-    except:
-        ValueError
+    except ValueError:
         print("Please enter a number between one and nine.")
         return
     return user_input
