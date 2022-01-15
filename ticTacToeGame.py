@@ -96,6 +96,22 @@ def game_done(board, message=False):
         if message:
             print("The game was won by", board[4])
         return True
+
+    # Check if all the squares have been taken and the game is tie.
+    tie = True
+    # Check the list/board for blanks. If there is a blank the game continues.
+    for space in board:
+        if space == BLANK:
+            tie = False
+
+    if tie:
+        if message:
+            print("The game is a draw.")
+        return True
+    
+
+    # If the game is not won after checking return False so the game continues.
+    return False
     
 
 
@@ -113,7 +129,7 @@ def play_game(board):
             symbol = O
 
         user_input = input(symbol + "> ")
-
+        
         # Check if the user wants to end the game by enters q.
         if quit_game(user_input) == True:
             end = True
@@ -127,6 +143,8 @@ def play_game(board):
         # Put an X or O on the board and save to the game list of moves.
         mark_square(user_input, symbol, board)
         display_board(board)
+        end = game_done(board, message=True)
+    return
 
     
 print()
