@@ -27,7 +27,7 @@ def is_x_turn(board):
         else:
             count_blank += 1
 
-        # Compare X's and O's to determine whose turn it is to go. 
+        # Compare X's and O's to determine whose turn it is. 
     if count_x <= count_o and count_blank != 0:
         return True
     else:
@@ -41,9 +41,9 @@ def quit_game(user_input):
         return False
     
 def check_user_input(user_input, symbol):
-    '''Check if user input is a letter or number. If a letter display error
-       message, if not change to an integer and check if the integer is 
-       a valid number between one and nine.'''
+    '''If user input is a letter or symbol display error
+       message and continue to prompt user for a number, 
+       if not change to type integer'''
     while type(user_input) != int:
         try:
             user_input = int(user_input)
@@ -56,6 +56,12 @@ def check_user_input(user_input, symbol):
     return 
 
 def check_user_input_in_range(user_input, symbol):
+    '''Check if user input is in range 1 through 9, if not continue to prompt
+       user for a number.'''
+    
+    # Call function to check if a number or symbol is entered by user, if not
+    # change the type of the user input to an integer and check if the value
+    # is between one and nine.
     user_input = check_user_input(user_input, symbol)
     while user_input < 1 or user_input > 9:
         print("Please enter a number between one and nine.")
@@ -65,6 +71,7 @@ def check_user_input_in_range(user_input, symbol):
     
 
 def mark_square(user_input, symbol, board):
+    ''' Mark the space entered by user with the appropriate X or O value.'''
     if board[user_input - 1] == BLANK:
         board[user_input - 1] = symbol
     else:
@@ -112,7 +119,6 @@ def game_done(board, message=False):
     for space in board:
         if space == BLANK:
             tie = False
-
     if tie:
         if message:
             print("The game is a draw.")
@@ -122,11 +128,13 @@ def game_done(board, message=False):
     return False
     
 
-
-def play_game(board):
+def main():
     '''Continue to prompt for X and O until the game is ended. The game ends 
     by one player getting three in a row horizontally, vertically, or 
     diagonally, or neither player wins (a tie), or the game is quit.'''
+
+    # Create a blank board for tic-tac-toe game.
+    board = new_board()
     end = False
 
     while end == False:
@@ -167,9 +175,9 @@ print("\t  4 | 5 | 6 ")
 print("\t ---+---+---")
 print("\t  7 | 8 | 9 ")
 print()
-# Create a blank board for tic-tac-toe game.
-board = new_board()
-play_game(board)
+
+if __name__ == "__main__":
+    main()
 
 
 
