@@ -73,8 +73,30 @@ def display_board(board):
     print(" {} | {} | {}".format(board[6], board[7], board[8]))  
 
 def game_done(board, message=False):
-    for space in range(len(board)):
-        pass 
+    '''Determine if there are three of the same symbol horizontally, 
+       vertically, diagonally, or if the game is a draw(tie).'''
+
+    # Check the horizontal rows.
+    for row in range(3):
+        if board[row * 3] != BLANK and board[row * 3] == board[row * 3 + 1] == board[row * 3 + 2]:
+            if message:
+                print("The game was won by", board[row * 3])
+            return True
+    
+    # Check the vertical rows.
+    for col in range(3):
+        if board[col * 3] != BLANK and board[col] == board[col + 3] == board[col + 6]:
+            if message:
+                print("The game was won by", board[col])
+            return True
+
+    # Check the diagnols.
+    if board[4] != BLANK and (board[0] == board[4] == board[8] or 
+       board[2] == board[4] == board[6]):
+        if message:
+            print("The game was won by", board[4])
+        return True
+    
 
 
 def play_game(board):
