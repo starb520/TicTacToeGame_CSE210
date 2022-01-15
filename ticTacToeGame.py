@@ -40,18 +40,27 @@ def quit_game(user_input):
     else:
         return False
     
-def check_user_input(user_input):
+def check_user_input(user_input, symbol):
     '''Check if user input is a letter or number. If a letter display error
        message, if not change to an integer and check if the integer is 
        a valid number between one and nine.'''
-    try:
-        user_input = int(user_input)
-        if user_input < 1 or user_input > 9:
-            print("Please enter a number between one and nine.")
-            return
-    except ValueError:
+    while type(user_input) != int:
+        try:
+            user_input = int(user_input)
+            return user_input
+        except ValueError:
+            print("Please enter a number: ")
+
+        user_input = input( symbol + "> ")
+    
+    return 
+
+def check_user_input_in_range(user_input, symbol):
+    user_input = check_user_input(user_input, symbol)
+    while user_input < 1 or user_input > 9:
         print("Please enter a number between one and nine.")
-        return
+        user_input = input("Enter a number in range: ")
+        user_input = check_user_input(user_input, symbol)
     return user_input
     
 
@@ -80,21 +89,21 @@ def game_done(board, message=False):
     for row in range(3):
         if board[row * 3] != BLANK and board[row * 3] == board[row * 3 + 1] == board[row * 3 + 2]:
             if message:
-                print("The game was won by", board[row * 3])
+                print("The game was won by ", board[row * 3])
             return True
     
     # Check the vertical rows.
     for col in range(3):
-        if board[col * 3] != BLANK and board[col] == board[col + 3] == board[col + 6]:
+        if board[col] != BLANK and board[col] == board[col + 3] == board[col + 6]:
             if message:
-                print("The game was won by", board[col])
+                print("The game was won by ", board[col])
             return True
 
     # Check the diagnols.
     if board[4] != BLANK and (board[0] == board[4] == board[8] or 
-       board[2] == board[4] == board[6]):
+                              board[2] == board[4] == board[6]):
         if message:
-            print("The game was won by", board[4])
+            print("The game was won by ", board[4])
         return True
 
     # Check if all the squares have been taken and the game is tie.
@@ -109,7 +118,6 @@ def game_done(board, message=False):
             print("The game is a draw.")
         return True
     
-
     # If the game is not won after checking return False so the game continues.
     return False
     
@@ -138,7 +146,7 @@ def play_game(board):
         # Check the user input for validity. Is it a number 1 through 9?
         # No letters or invalid numbers.
         else:
-            user_input = check_user_input(user_input)
+            user_input = check_user_input_in_range(user_input, symbol)
 
         # Put an X or O on the board and save to the game list of moves.
         mark_square(user_input, symbol, board)
