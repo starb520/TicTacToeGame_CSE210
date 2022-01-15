@@ -49,7 +49,7 @@ def check_user_input(user_input, symbol):
             user_input = int(user_input)
             return user_input
         except ValueError:
-            print("Please enter a number: ")
+            print("Please enter a number.")
 
         user_input = input( symbol + "> ")
     
@@ -59,7 +59,7 @@ def check_user_input_in_range(user_input, symbol):
     user_input = check_user_input(user_input, symbol)
     while user_input < 1 or user_input > 9:
         print("Please enter a number between one and nine.")
-        user_input = input("Enter a number in range: ")
+        user_input = input(symbol + "> ")
         user_input = check_user_input(user_input, symbol)
     return user_input
     
@@ -150,7 +150,9 @@ def play_game(board):
 
         # Put an X or O on the board and save to the game list of moves.
         mark_square(user_input, symbol, board)
+        print()
         display_board(board)
+        print()
         end = game_done(board, message=True)
     return
 
@@ -164,7 +166,7 @@ print("\t ---+---+---")
 print("\t  4 | 5 | 6 ")
 print("\t ---+---+---")
 print("\t  7 | 8 | 9 ")
-
+print()
 # Create a blank board for tic-tac-toe game.
 board = new_board()
 play_game(board)
