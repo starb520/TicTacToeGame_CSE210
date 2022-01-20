@@ -1,1 +1,14 @@
 python-sample.py
+practiceGame.py
+.gitignore
+dice-incomplete/.DS_Store
+dice-incomplete/README.md
+dice-incomplete/dice/__main__.py
+dice-incomplete/dice/.DS_Store
+dice-incomplete/dice/__pycache__/__main__.cpython-39.pyc
+dice-incomplete/dice/game/.DS_Store
+dice-incomplete/dice/game/die.py
+dice-incomplete/dice/game/director.py
+dice-incomplete/dice/game/__pycache__/die.cpython-310.pyc
+dice-incomplete/dice/game/__pycache__/director.cpython-39.pyc
+dice-incomplete/dice/game/__pycache__/director.cpython-310.pyc
