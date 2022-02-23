@@ -39,3 +39,6 @@ class Die:
         elif self.value == 5:
             self.points = 50
 
+die = Die()
+die.roll()
+print(die.value)
